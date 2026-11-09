@@ -30,7 +30,7 @@ a{color:inherit;text-decoration:none}
 .roll{display:inline-block;overflow:hidden;height:1.25em;line-height:1.25em;vertical-align:top}
 .roll>span{display:block;transition:translate .6s var(--ease)}
 .roll>span::after{content:attr(data-t);display:block}
-a:hover>.roll>span{translate:0 -50%}
+a:hover>.roll>span,button:hover>.roll>span{translate:0 -50%}
 /* mark + dock (same as home) */
 .mark{position:fixed;top:calc(18px + env(safe-area-inset-top,0px));left:50%;translate:-50% 0;z-index:40;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);font-family:Georgia,serif;font-style:italic;font-size:20px;color:#fff}
 .dock{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));translate:-50% 0;z-index:40;display:flex;align-items:center;gap:2px;padding:5px;border-radius:16px;background:rgba(18,18,18,.72);border:1px solid rgba(255,255,255,.12);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 18px 50px -18px rgba(0,0,0,.8)}
@@ -49,14 +49,6 @@ h1{margin:0;font-weight:500;font-size:clamp(48px,7.4vw,124px);line-height:.96;le
 /* product */
 .prod{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px;margin-top:clamp(40px,5vw,80px)}
 .vis{position:relative;aspect-ratio:16/11;border-radius:14px;overflow:hidden;background:#050505;border:1px solid var(--line)}
-.vis .bg{position:absolute;inset:0;background:radial-gradient(70% 85% at 50% 18%,#FF9A62 0%,#E8541E 22%,#9E1428 52%,#2A0509 80%,#0A0102 100%)}
-.vis .floor{position:absolute;left:-10%;right:-10%;bottom:-38%;height:72%;border-radius:50%;background:radial-gradient(60% 55% at 50% 30%,rgba(255,150,100,.35),rgba(60,6,12,.2) 60%,transparent 75%);filter:blur(6px)}
-.vis .light{position:absolute;left:50%;top:-6%;translate:-50% 0;width:44%;height:12%;border-radius:10px;background:linear-gradient(#fff,#FFE3CC);box-shadow:0 0 60px 20px rgba(255,190,150,.55),0 0 160px 60px rgba(255,120,60,.35);animation:glow 5s ease-in-out infinite alternate}
-.vis .obj{position:absolute;left:50%;bottom:22%;translate:-50% 0;width:15%;aspect-ratio:1/1.6;border-radius:18% 18% 12% 12%;background:linear-gradient(100deg,#120304 0%,#3A0A10 35%,#FFB08A 48%,#3A0A10 60%,#0E0203 100%);box-shadow:0 30px 40px -10px rgba(0,0,0,.7)}
-.vis .obj::before{content:"";position:absolute;left:30%;right:30%;top:-22%;height:24%;border-radius:4px 4px 2px 2px;background:linear-gradient(100deg,#1a1a1a,#888 45%,#1a1a1a)}
-.vis .shadow{position:absolute;left:50%;bottom:19%;translate:-50% 0;width:26%;height:5%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.75),transparent)}
-.vis .ui{position:absolute;left:14px;top:14px}
-@keyframes glow{from{opacity:.85}to{opacity:1}}
 .info{display:flex;flex-direction:column;gap:22px;padding:clamp(20px,2.4vw,34px);border-radius:14px;background:var(--bg2);border:1px solid var(--line)}
 .info h2{margin:0;font-weight:500;font-size:clamp(36px,4vw,64px);line-height:1;letter-spacing:-.04em;color:#FFFFFF}
 .info .lead{margin:0;color:#D9D9D9;font-size:clamp(16px,1.3vw,19px);line-height:1.55}
@@ -69,16 +61,37 @@ h1{margin:0;font-weight:500;font-size:clamp(48px,7.4vw,124px);line-height:.96;le
 .more{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:12px;padding:clamp(20px,2.4vw,34px);border-radius:14px;border:1px dashed rgba(255,255,255,.16)}
 .more h3{margin:0;font-weight:500;font-size:clamp(22px,2.2vw,34px);letter-spacing:-.03em;color:#FFFFFF}
 .more p{margin:6px 0 0;color:#D9D9D9;font-size:14px}
+/* Kelvin Studio */
+.vis.kv{aspect-ratio:16/9;background:linear-gradient(135deg,#0B2E8A,#1F5BFF)}
+.vis.kv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vis.kv iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
+.play{position:absolute;right:16px;bottom:16px;z-index:2;display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 22px 0 8px;border:1px solid rgba(255,255,255,.3);border-radius:999px;background:rgba(10,10,10,.55);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:#fff;font:500 14px var(--f);cursor:pointer;transition:background .4s,scale .5s var(--ease)}
+.play i{width:36px;height:36px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.play i::before{content:"";margin-left:3px;border-left:11px solid #0B0B0B;border-top:7px solid transparent;border-bottom:7px solid transparent}
+.play:hover{background:var(--red);scale:1.04}
+.vis.kv.playing .play{display:none}
+.tag.free{background:#fff;border-color:#fff;color:#0B0B0B;font-weight:600}
+.meta.two{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:16px}
+.pill{cursor:pointer;border:0;font-family:var(--f)}
+.inside{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px}
+.inside>div{padding:clamp(20px,2.4vw,34px);border-radius:14px;background:var(--bg2);border:1px solid var(--line)}
+.inside h3{margin:0 0 18px;font-weight:500;font-size:clamp(22px,2.2vw,34px);letter-spacing:-.03em;color:#FFFFFF}
+.feats.cols{columns:2;column-gap:28px;border-top:0}
+.feats.cols li{break-inside:avoid;border-top:1px solid var(--line);border-bottom:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.spec{display:flex;flex-direction:column;gap:18px}
+.spec p{margin:0;color:#D9D9D9;font-size:15px;line-height:1.6}
 footer{max-width:1760px;margin:0 auto;color:#D9D9D9;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:96px var(--pad) 110px}
 .rise{animation:rise 1.2s var(--ease) both}
 .rise.d1{animation-delay:.1s}.rise.d2{animation-delay:.2s}
 @keyframes rise{from{opacity:0;translate:0 24px}to{opacity:1;translate:0 0}}
 @media (max-width:900px){
-  .head,.prod{grid-template-columns:1fr}
+  .head,.prod,.inside{grid-template-columns:1fr}
+  .feats.cols{columns:1}
   .eyebrow{grid-template-columns:44px minmax(0,1fr)}.eyebrow .sm{display:none}
   .dock a:not(.sun):not(.cta):not(.keep){display:none}
 }
-@media (prefers-reduced-motion:reduce){.rise,.vis .light{animation:none}}
+@media (prefers-reduced-motion:reduce){.rise{animation:none}}
 </style>
 </head>
 <body>
@@ -93,38 +106,57 @@ footer{max-width:1760px;margin:0 auto;color:#D9D9D9;display:flex;justify-content
 </nav>
 
 <main>
-  <div class="eyebrow rise"><span class="n">(A)</span><span>Add-ons</span><span class="sm">Cinema 4D · Redshift</span></div>
+  <div class="eyebrow rise"><span class="n">(A)</span><span>Add-ons</span><span class="sm">Cinema 4D</span></div>
   <div class="head rise d1">
     <h1>Add-ons for <span class="it">3D artists</span></h1>
-    <p class="sm" style="font-size:15px">Tools I build for my own production work, packaged so you can use them too. Every add-on is sold and delivered through Gumroad.</p>
+    <p class="sm" style="font-size:15px">Tools I build for my own production work, packaged so you can use them too. Every add-on is delivered through Gumroad.</p>
   </div>
 
-  <article class="prod rise d2" id="lit-gradient">
-    <div class="vis" role="img" aria-label="Preview: a product on a gradient background lit by an area light">
-      <div class="bg"></div><div class="floor"></div><div class="light"></div><div class="shadow"></div><div class="obj"></div>
-      <span class="tag ui">Preview</span>
+  <article class="prod rise d2" id="kelvin-studio">
+    <div class="vis kv" id="kvVis">
+      <img src="../images/kelvin-studio.webp" alt="Kelvin Studio: free studio lighting for Cinema 4D, in one click" width="1920" height="1080" onerror="kvPlay(false)">
+      <button class="play" type="button" onclick="kvPlay(true)" aria-label="Play the Kelvin Studio demo video"><i></i>Watch demo</button>
     </div>
     <div class="info">
-      <div><span class="tag soon"><i></i>Coming soon</span></div>
+      <div class="chips" style="margin:0"><span class="tag free">Free</span><span class="tag">Pay what you want</span><span class="tag">v3.19.3</span></div>
       <div>
-        <h2>Lit <span class="it">Gradient</span></h2>
-        <p class="sm" style="margin:10px 0 0">Plugin for Cinema 4D · Redshift</p>
+        <h2>Kelvin <span class="it">Studio</span></h2>
+        <p class="sm" style="margin:10px 0 0">Studio Lighting for Cinema 4D</p>
       </div>
-      <p class="lead">One-click gradient backgrounds lit by a real area light. The falloff, the glow and the shadow come from actual lighting, not a painted texture.</p>
-      <ul class="feats">
-        <li>One click builds the background and its light</li>
-        <li>Works with a studio sweep or a plain background plane</li>
-        <li>Clean UI panel inside Cinema 4D</li>
-        <li>Made for Redshift product renders</li>
-      </ul>
-      <div class="meta">
-        <div><span class="sm">Software</span><b>Cinema 4D</b></div>
-        <div><span class="sm">Renderer</span><b>Redshift</b></div>
-        <div><span class="sm">Price</span><b>TBA</b></div>
+      <p class="lead">One-click studio lighting, lit backdrops and product lights — light any product in seconds.</p>
+      <p class="sm" style="margin:0;font-size:14px;line-height:1.6">Kelvin Studio builds a lit gradient backdrop, a soft key light and a render-ready camera with a single click — then gives you full control over every detail. Light any product in seconds.</p>
+      <div class="meta two">
+        <div><span class="sm">Works with</span><b>Redshift · Octane · Arnold · Native</b></div>
+        <div><span class="sm">Price</span><b>Free · tips optional</b></div>
+        <div><span class="sm">Requires</span><b>Cinema 4D 2024 or newer</b></div>
+        <div><span class="sm">Platform</span><b>Windows &amp; macOS</b></div>
       </div>
       <div class="acts">
-        <a class="pill" aria-disabled="true">Coming soon on Gumroad</a>
-        <a class="pill ghost" href="https://wa.me/201146805132?text=Hi%20Mohamed%2C%20let%20me%20know%20when%20Lit%20Gradient%20is%20available." target="_blank" rel="noopener"><span class="roll"><span data-t="Get notified ↗">Get notified ↗</span></span></a>
+        <a class="pill" href="https://5188979271326.gumroad.com/l/kelvin-studio" target="_blank" rel="noopener"><span class="roll"><span data-t="Get it free ↗">Get it free ↗</span></span></a>
+        <button class="pill ghost" type="button" onclick="kvPlay(true)"><span class="roll"><span data-t="Watch demo">Watch demo</span></span></button>
+      </div>
+    </div>
+    <div class="inside">
+      <div>
+        <h3>What's inside</h3>
+        <ul class="feats cols">
+          <li>44 one-click lighting looks (studio, mood, colour, rims, backdrop)</li>
+          <li>Drag the light anywhere — place it behind, left, right, top or base</li>
+          <li>Real Kelvin temperature, 2700K–9000K</li>
+          <li>12 colour palettes, colour wheel and harmonies</li>
+          <li>Product lights that arrange themselves around your object</li>
+          <li>Backdrop surfaces (matte, satin, gloss) and a mirror floor</li>
+          <li>Light shapes: circle, oval, strip, square</li>
+          <li>Render-engine cameras with focal length (12–120 mm) and camera views</li>
+          <li>One-click turntable</li>
+          <li>Undo/redo, save your own looks, variations, surprise me, scale all</li>
+        </ul>
+      </div>
+      <div class="spec">
+        <h3 style="margin:0">Free, for real</h3>
+        <p>Download it at no cost. If Kelvin Studio saves you time, you can leave a tip on Gumroad — it's optional, never required.</p>
+        <div class="chips"><span class="tag">Redshift</span><span class="tag">Octane</span><span class="tag">Arnold</span><span class="tag">Native</span></div>
+        <div class="acts" style="margin-top:6px"><a class="pill" href="https://5188979271326.gumroad.com/l/kelvin-studio" target="_blank" rel="noopener"><span class="roll"><span data-t="Get it free ↗">Get it free ↗</span></span></a></div>
       </div>
     </div>
   </article>
@@ -136,5 +168,11 @@ footer{max-width:1760px;margin:0 auto;color:#D9D9D9;display:flex;justify-content
 </main>
 
 <footer><span class="sm">©2026 Mohamed Reda — All rights reserved</span><a class="sm" href="../">reda3d.com ↗</a></footer>
+<script>
+function kvPlay(auto){var v=document.getElementById('kvVis');if(!v||v.querySelector('iframe'))return;
+var f=document.createElement('iframe');f.src='https://player.vimeo.com/video/1245028036?title=0&byline=0&portrait=0&dnt=1'+(auto?'&autoplay=1':'');
+f.allow='autoplay; fullscreen; picture-in-picture';f.allowFullscreen=true;f.title='Kelvin Studio demo';f.loading='lazy';v.appendChild(f);v.classList.add('playing');
+if(auto&&v.getBoundingClientRect().top<0)v.scrollIntoView({behavior:'smooth',block:'center'});}
+</script>
 </body>
 </html>
